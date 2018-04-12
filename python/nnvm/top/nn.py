@@ -85,15 +85,14 @@ def compute_conv2d(attrs, inputs, _):
     channels = attrs.get_int("channels")
     layout = attrs["layout"]
     assert layout == "NCHW" or layout == "NHWC"
-    
-    (h,w) = dilation
-    if (dilation == (1,1)):
+    (h, w) = dilation
+    if dilation == (1, 1):
         inputs1 = inputs[1]
-    elif (h > 1 and w > 1):
-        if (layout == "NCHW"):
-           inputs1 = topi.nn.dilate(inputs[1], [1,1,h,w])
+    elif h > 1 and w > 1:
+        if layout == "NCHW":
+            inputs1 = topi.nn.dilate(inputs[1], [1, 1, h, w])
         else: #layout == NHWC
-           inputs1 = topi.nn.dilate(inputs[1], [1,h,w,1])
+            inputs1 = topi.nn.dilate(inputs[1], [1, h, w, 1])
     else:
         raise ValueError("dilation should be positive value")
 
