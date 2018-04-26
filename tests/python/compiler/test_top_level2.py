@@ -196,7 +196,7 @@ def test_upsampling():
 
 if __name__ == "__main__":
     test_conv2d()
-    test_dilated_conv2d
+    test_dilated_conv2d()
     test_grouped_conv2d()
     test_conv2d_transpose()
     test_max_pool2d()
